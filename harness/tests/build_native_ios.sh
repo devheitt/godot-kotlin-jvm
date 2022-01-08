@@ -2,6 +2,7 @@
 -cp build/libs/godot-bootstrap.jar:build/libs/main.jar \
 -H:+SharedLibrary \
 -H:+ExitAfterRelocatableImageWrite \
+-H:+UseCAPCache \
 -H:CAPCacheDir=./ios-cap \
 -H:Name=usercode \
 -H:CompilerBackend=llvm \
@@ -18,11 +19,22 @@
 --no-server \
 --verbose \
 --native-image-info \
+-Djdk.internal.lambda.eagerlyInitialize=false \
+-H:+AddAllCharsets \
+-H:+ReportExceptionStackTraces \
+-H:-DeadlockWatchdogExitOnTimeout \
+-H:DeadlockWatchdogInterval=0 \
+-H:+RemoveSaturatedTypeFlows \
+-H:EnableURLProtocols=http,https \
+-H:+PrintAnalysisCallTree
+#-H:ReflectionConfigurationFiles=reflectionconfig-arm64-ios.json
 #-H:Log=registerResource:verbose \
 #\
 #-Djdk.internal.lambda.eagerlyInitialize=false \
 #-H:-UseServiceLoaderFeature \
 #\
+
+#-H:ReflectionConfigurationFiles=/Users/pierre-thomasmeisels/IdeaProjects/gluon-samples/HelloGluon/target/gluonfx/arm64-ios/gvm/reflectionconfig-arm64-ios.json
 
 
 #mv usercode.dylib build/libs/usercode.dylib
