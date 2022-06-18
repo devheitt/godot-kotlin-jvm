@@ -1334,7 +1334,7 @@ public open class Node : Object() {
   }
 
   /**
-   * Changes the RPC mode for the given `method` to the given `rpc_mode`, optionally specifying the `transfer_mode` and `channel` (on supported peers). See [enum RPCMode] and [enum TransferMode]. An alternative is annotating methods and properties with the corresponding annotation (`@rpc(any)`, `@rpc(auth)`). By default, methods are not exposed to networking (and RPCs).
+   * Changes the RPC mode for the given `method` to the given `rpc_mode`, optionally specifying the `transfer_mode` and `channel` (on supported peers). See [enum RPCMode] and [enum TransferMode]. An alternative is annotating methods and properties with the corresponding annotation (`@rpc(any)`, `@rpc(authority)`). By default, methods are not exposed to networking (and RPCs).
    */
   public fun rpcConfig(
     method: StringName,
@@ -1349,7 +1349,7 @@ public open class Node : Object() {
   }
 
   /**
-   * Sends a remote procedure call request for the given `method` to peers on the network (and locally), optionally sending all additional arguments as arguments to the method called by the RPC. The call request will only be received by nodes with the same [godot.core.NodePath], including the exact same node name. Behaviour depends on the RPC configuration for the given method, see [rpcConfig]. Methods are not exposed to RPCs by default. Returns an empty [Variant].
+   * Sends a remote procedure call request for the given `method` to peers on the network (and locally), optionally sending all additional arguments as arguments to the method called by the RPC. The call request will only be received by nodes with the same [godot.core.NodePath], including the exact same node name. Behaviour depends on the RPC configuration for the given method, see [rpcConfig]. Methods are not exposed to RPCs by default. Returns `null`.
    *
    * **Note:** You can only safely use RPCs on clients after you received the `connected_to_server` signal from the [godot.MultiplayerAPI]. You also need to keep track of the connection state, either by the [godot.MultiplayerAPI] signals like `server_disconnected` or by checking `get_multiplayer().peer.get_connection_status() == CONNECTION_CONNECTED`.
    */
@@ -1359,7 +1359,7 @@ public open class Node : Object() {
   }
 
   /**
-   * Sends a [rpc] to a specific peer identified by `peer_id` (see [godot.MultiplayerPeer.setTargetPeer]). Returns an empty [Variant].
+   * Sends a [rpc] to a specific peer identified by `peer_id` (see [godot.MultiplayerPeer.setTargetPeer]). Returns `null`.
    */
   public fun rpcId(
     peerId: Long,

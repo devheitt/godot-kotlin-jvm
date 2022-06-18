@@ -41,9 +41,6 @@ public open class MultiplayerSpawner : Node() {
    */
   public val spawned: Signal2<Long, Node> by signal("sceneId", "node")
 
-  /**
-   *
-   */
   public var replication: VariantArray<Any?>
     get() {
       TransferContext.writeArguments()

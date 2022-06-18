@@ -67,9 +67,6 @@ public open class Curve3D : Resource() {
     callConstructor(ENGINECLASS_CURVE3D)
   }
 
-  /**
-   * Returns the number of points describing the curve.
-   */
   public fun getPointCount(): Long {
     TransferContext.writeArguments()
     TransferContext.callMethod(rawPtr, ENGINEMETHOD_ENGINECLASS_CURVE3D_GET_POINT_COUNT, LONG)

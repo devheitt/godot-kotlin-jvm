@@ -803,6 +803,8 @@ public open class RichTextLabel : Control() {
 
   /**
    * Returns the line number of the character position provided.
+   *
+   * **Note:** If [threaded] is enabled, this method returns a value for the loaded part of the document. Use [isReady] or [finished] to determine whether document is fully loaded.
    */
   public fun getCharacterLine(character: Long): Long {
     TransferContext.writeArguments(LONG to character)
@@ -813,6 +815,8 @@ public open class RichTextLabel : Control() {
 
   /**
    * Returns the paragraph number of the character position provided.
+   *
+   * **Note:** If [threaded] is enabled, this method returns a value for the loaded part of the document. Use [isReady] or [finished] to determine whether document is fully loaded.
    */
   public fun getCharacterParagraph(character: Long): Long {
     TransferContext.writeArguments(LONG to character)
@@ -833,6 +837,8 @@ public open class RichTextLabel : Control() {
 
   /**
    * Returns the total number of lines in the text. Wrapped text is counted as multiple lines.
+   *
+   * **Note:** If [threaded] is enabled, this method returns a value for the loaded part of the document. Use [isReady] or [finished] to determine whether document is fully loaded.
    */
   public fun getLineCount(): Long {
     TransferContext.writeArguments()
@@ -842,6 +848,8 @@ public open class RichTextLabel : Control() {
 
   /**
    * Returns the number of visible lines.
+   *
+   * **Note:** If [threaded] is enabled, this method returns a value for the loaded part of the document. Use [isReady] or [finished] to determine whether document is fully loaded.
    */
   public fun getVisibleLineCount(): Long {
     TransferContext.writeArguments()
@@ -862,6 +870,8 @@ public open class RichTextLabel : Control() {
 
   /**
    * Returns the number of visible paragraphs. A paragraph is considered visible if at least one of its lines is visible.
+   *
+   * **Note:** If [threaded] is enabled, this method returns a value for the loaded part of the document. Use [isReady] or [finished] to determine whether document is fully loaded.
    */
   public fun getVisibleParagraphCount(): Long {
     TransferContext.writeArguments()
@@ -872,6 +882,8 @@ public open class RichTextLabel : Control() {
 
   /**
    * Returns the height of the content.
+   *
+   * **Note:** If [threaded] is enabled, this method returns a value for the loaded part of the document. Use [isReady] or [finished] to determine whether document is fully loaded.
    */
   public fun getContentHeight(): Long {
     TransferContext.writeArguments()
@@ -882,6 +894,8 @@ public open class RichTextLabel : Control() {
 
   /**
    * Returns the width of the content.
+   *
+   * **Note:** If [threaded] is enabled, this method returns a value for the loaded part of the document. Use [isReady] or [finished] to determine whether document is fully loaded.
    */
   public fun getContentWidth(): Long {
     TransferContext.writeArguments()
@@ -892,6 +906,8 @@ public open class RichTextLabel : Control() {
 
   /**
    * Returns the vertical offset of the line found at the provided index.
+   *
+   * **Note:** If [threaded] is enabled, this method returns a value for the loaded part of the document. Use [isReady] or [finished] to determine whether document is fully loaded.
    */
   public fun getLineOffset(line: Long): Double {
     TransferContext.writeArguments(LONG to line)
@@ -902,6 +918,8 @@ public open class RichTextLabel : Control() {
 
   /**
    * Returns the vertical offset of the paragraph found at the provided index.
+   *
+   * **Note:** If [threaded] is enabled, this method returns a value for the loaded part of the document. Use [isReady] or [finished] to determine whether document is fully loaded.
    */
   public fun getParagraphOffset(paragraph: Long): Double {
     TransferContext.writeArguments(LONG to paragraph)

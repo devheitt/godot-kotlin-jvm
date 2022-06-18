@@ -63,7 +63,7 @@ public open class VehicleBody3D : RigidDynamicBody3D() {
     }
 
   /**
-   * The steering angle for the vehicle. Setting this to a non-zero value will result in the vehicle turning when it's moving. Wheels that have [godot.VehicleWheel3D.useAsSteering] set to `true` will automatically be rotated.
+   * The steering angle for the vehicle, in radians. Setting this to a non-zero value will result in the vehicle turning when it's moving. Wheels that have [godot.VehicleWheel3D.useAsSteering] set to `true` will automatically be rotated.
    */
   public var steering: Double
     get() {

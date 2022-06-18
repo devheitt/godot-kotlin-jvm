@@ -31,6 +31,8 @@ import kotlin.Unit
  * 3D Agent used in navigation for collision avoidance.
  *
  * 3D Agent that is used in navigation to reach a location while avoiding static and dynamic obstacles. The dynamic obstacles are avoided using RVO collision avoidance. The agent needs navigation data to work correctly. [godot.NavigationAgent3D] is physics safe.
+ *
+ * **Note:** After [setTargetLocation] is used it is required to use the [getNextLocation] function once every physics frame to update the internal path logic of the NavigationAgent. The returned vector position from this function should be used as the next movement position for the agent's parent Node.
  */
 @GodotBaseType
 public open class NavigationAgent3D : Node() {
@@ -86,7 +88,7 @@ public open class NavigationAgent3D : Node() {
     }
 
   /**
-   * The agent height offset to match the navigation mesh height.
+   * The NavigationAgent height offset is subtracted from the y-axis value of any vector path position for this NavigationAgent. The NavigationAgent height offset does not change or influence the navigation mesh or pathfinding query result. Additional navigation maps that use regions with navigation meshes that the developer baked with appropriate agent radius or height values are required to support different-sized agents.
    */
   public var agentHeightOffset: Double
     get() {
@@ -202,7 +204,7 @@ public open class NavigationAgent3D : Node() {
   }
 
   /**
-   *
+   * Returns the [RID] of this agent on the [godot.NavigationServer3D].
    */
   public fun getRid(): RID {
     TransferContext.writeArguments()
@@ -230,7 +232,7 @@ public open class NavigationAgent3D : Node() {
   }
 
   /**
-   * Returns a [godot.core.Vector3] in global coordinates, that can be moved to, making sure that there are no static objects in the way. If the agent does not have a navigation path, it will return the origin of the agent's parent.
+   * Returns the next location in global coordinates that can be moved to, making sure that there are no static objects in the way. If the agent does not have a navigation path, it will return the position of the agent's parent. The use of this function once every physics frame is required to update the internal path logic of the NavigationAgent.
    */
   public fun getNextLocation(): Vector3 {
     TransferContext.writeArguments()
@@ -258,7 +260,7 @@ public open class NavigationAgent3D : Node() {
   }
 
   /**
-   * Returns the path from start to finish in global coordinates.
+   * Returns this agent's current path from start to finish in global coordinates. The path only updates when the target location is changed or the agent requires a repath. The path array is not intended to be used in direct path movement as the agent has its own internal path logic that would get corrupted by changing the path array manually. Use the intended [getNextLocation] once every physics frame to receive the next path point for the agents movement as this function also updates the internal path logic.
    */
   public fun getNavPath(): PackedVector3Array {
     TransferContext.writeArguments()

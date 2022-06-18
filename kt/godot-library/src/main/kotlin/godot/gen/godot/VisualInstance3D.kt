@@ -31,6 +31,8 @@ public open class VisualInstance3D : Node3D() {
    * The render layer(s) this [godot.VisualInstance3D] is drawn on.
    *
    * This object will only be visible for [godot.Camera3D]s whose cull mask includes the render object this [godot.VisualInstance3D] is set to.
+   *
+   * For [godot.Light3D]s, this can be used to control which [godot.VisualInstance3D]s are affected by a specific light. For [godot.GPUParticles3D], this can be used to control which particles are effected by a specific attractor. For [godot.Decal]s, this can be used to control which [godot.VisualInstance3D]s are affected by a specific decal.
    */
   public var layers: Long
     get() {

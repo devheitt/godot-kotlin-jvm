@@ -15,12 +15,18 @@ import kotlin.Suppress
 import kotlin.Unit
 
 /**
+ * Box-shaped 3D particle collision shape affecting [godot.GPUParticles3D] nodes.
  *
+ * Box-shaped 3D particle collision shape affecting [godot.GPUParticles3D] nodes.
+ *
+ * **Note:** [godot.ParticlesMaterial.collisionEnabled] must be `true` on the [godot.GPUParticles3D]'s process material for collision to work.
+ *
+ * **Note:** Particle collision only affects [godot.GPUParticles3D], not [godot.CPUParticles3D].
  */
 @GodotBaseType
 public open class GPUParticlesCollisionBox3D : GPUParticlesCollision3D() {
   /**
-   *
+   * The collision box's extents in 3D units.
    */
   public var extents: Vector3
     get() {

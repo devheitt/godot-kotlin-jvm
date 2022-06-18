@@ -2079,7 +2079,7 @@ public open class Control : CanvasItem() {
      */
     MOUSE_FILTER_STOP(0),
     /**
-     * The control will receive mouse button input events through [_guiInput] if clicked on. And the control will receive the [mouseEntered] and [mouseExited] signals. If this control does not handle the event, the parent control (if any) will be considered, and so on until there is no more parent control to potentially handle it. This also allows signals to fire in other controls. Even if no control handled it at all, the event will still be handled automatically, so unhandled input will not be fired.
+     * The control will receive mouse button input events through [_guiInput] if clicked on. And the control will receive the [mouseEntered] and [mouseExited] signals. If this control does not handle the event, the parent control (if any) will be considered, and so on until there is no more parent control to potentially handle it. This also allows signals to fire in other controls. If no control handled it, the event will be passed to `_unhandled_input` for further processing.
      */
     MOUSE_FILTER_PASS(1),
     /**
@@ -2118,11 +2118,11 @@ public open class Control : CanvasItem() {
      */
     CURSOR_CROSS(3),
     /**
-     * Show the system's wait mouse cursor, often an hourglass, when the user hovers the node.
+     * Show the system's wait mouse cursor when the user hovers the node. Often an hourglass.
      */
     CURSOR_WAIT(4),
     /**
-     * Show the system's busy mouse cursor when the user hovers the node. Often an hourglass.
+     * Show the system's busy mouse cursor when the user hovers the node. Often an arrow with a small hourglass.
      */
     CURSOR_BUSY(5),
     /**

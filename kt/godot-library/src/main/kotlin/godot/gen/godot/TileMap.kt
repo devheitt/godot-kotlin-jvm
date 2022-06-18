@@ -413,11 +413,6 @@ public open class TileMap : Node2D() {
     TransferContext.callMethod(rawPtr, ENGINEMETHOD_ENGINECLASS_TILEMAP_SET_PATTERN, NIL)
   }
 
-  /**
-   * Updates all the cells in the `cells` coordinates array and replace them by tiles that matches the surrounding cells terrains. Only cells form the given `terrain_set` are considered.
-   *
-   * If `ignore_empty_terrains` is true, zones with no terrain defined are ignored to select the tiles.
-   */
   public fun setCellsFromSurroundingTerrains(
     layer: Long,
     cells: VariantArray<Any?>,

@@ -120,9 +120,6 @@ public open class Tree : Control() {
    */
   public val itemCollapsed: Signal1<TreeItem> by signal("item")
 
-  /**
-   * Emitted when an item is edited using the right mouse button.
-   */
   public val itemRmbEdited: Signal0 by signal()
 
   /**
@@ -130,9 +127,6 @@ public open class Tree : Control() {
    */
   public val itemEdited: Signal0 by signal()
 
-  /**
-   * Emitted when the right mouse button is pressed if right mouse button selection is active and the tree is empty.
-   */
   public val emptyTreeRmbSelected: Signal1<Vector2> by signal("position")
 
   /**
@@ -145,14 +139,8 @@ public open class Tree : Control() {
    */
   public val itemDoubleClicked: Signal0 by signal()
 
-  /**
-   * Emitted when the right mouse button is pressed in the empty space of the tree.
-   */
   public val emptyRmb: Signal1<Vector2> by signal("position")
 
-  /**
-   * Emitted when an item is selected with the right mouse button.
-   */
   public val itemRmbSelected: Signal1<Vector2> by signal("position")
 
   /**
@@ -165,9 +153,6 @@ public open class Tree : Control() {
    */
   public val cellSelected: Signal0 by signal()
 
-  /**
-   * Emitted when a button on the tree was pressed (see [godot.TreeItem.addButton]).
-   */
   public val buttonPressed: Signal3<TreeItem, Long, Long> by signal("item", "column", "id")
 
   /**

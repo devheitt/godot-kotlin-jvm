@@ -812,6 +812,8 @@ public open class BaseMaterial3D internal constructor() : Material() {
 
   /**
    * Filter flags for the texture. See [enum TextureFilter] for options.
+   *
+   * **Note:** [heightmapTexture] is always sampled with linear filtering, even if nearest-neighbor filtering is selected here. This is to ensure the heightmap effect looks as intended. If you need sharper height transitions between pixels, resize the heightmap texture in an image editor with nearest-neighbor filtering.
    */
   public var textureFilter: Long
     get() {
@@ -1268,7 +1270,9 @@ public open class BaseMaterial3D internal constructor() : Material() {
      */
     FLAG_ALBEDO_FROM_VERTEX_COLOR(1),
     /**
-     * Vertex color is in sRGB space and needs to be converted to linear. Only applies in the Vulkan renderer.
+     * Vertex colors are considered to be stored in sRGB color space and are converted to linear color space during rendering. See also [vertexColorIsSrgb].
+     *
+     * **Note:** Only effective when using the Vulkan Clustered or Vulkan Mobile backends.
      */
     FLAG_SRGB_VERTEX_COLOR(2),
     /**
@@ -1308,7 +1312,7 @@ public open class BaseMaterial3D internal constructor() : Material() {
      */
     FLAG_EMISSION_ON_UV2(11),
     /**
-     * Forces the shader to convert albedo from sRGB space to linear space.
+     * Forces the shader to convert albedo from sRGB space to linear space. See also [albedoTextureForceSrgb].
      */
     FLAG_ALBEDO_TEXTURE_FORCE_SRGB(12),
     /**

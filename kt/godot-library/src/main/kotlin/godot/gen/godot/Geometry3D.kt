@@ -123,7 +123,7 @@ public object Geometry3D : Object() {
   }
 
   /**
-   * Tests if the 3D ray starting at `from` with the direction of `dir` intersects the triangle specified by `a`, `b` and `c`. If yes, returns the point of intersection as [godot.core.Vector3]. If no intersection takes place, an empty [Variant] is returned.
+   * Tests if the 3D ray starting at `from` with the direction of `dir` intersects the triangle specified by `a`, `b` and `c`. If yes, returns the point of intersection as [godot.core.Vector3]. If no intersection takes place, returns `null`.
    */
   public fun rayIntersectsTriangle(
     from: Vector3,
@@ -139,7 +139,7 @@ public object Geometry3D : Object() {
   }
 
   /**
-   * Tests if the segment (`from`, `to`) intersects the triangle `a`, `b`, `c`. If yes, returns the point of intersection as [godot.core.Vector3]. If no intersection takes place, an empty [Variant] is returned.
+   * Tests if the segment (`from`, `to`) intersects the triangle `a`, `b`, `c`. If yes, returns the point of intersection as [godot.core.Vector3]. If no intersection takes place, returns `null`.
    */
   public fun segmentIntersectsTriangle(
     from: Vector3,

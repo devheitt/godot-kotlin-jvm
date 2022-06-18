@@ -25,6 +25,14 @@ import kotlin.Unit
  * A region of the navigation map. It tells the [godot.NavigationServer3D] what can be navigated and what cannot, based on its [godot.NavigationMesh] resource.
  *
  * Two regions can be connected to each other if they share a similar edge. You can set the minimum distance between two vertices required to connect two edges by using [godot.NavigationServer3D.mapSetEdgeConnectionMargin].
+ *
+ * **Note:** Overlapping two regions' navmeshes is not enough for connecting two regions. They must share a similar edge.
+ *
+ * The cost of entering this region from another region can be controlled with the [enterCost] value.
+ *
+ * **Note**: This value is not added to the path cost when the start position is already inside this region.
+ *
+ * The cost of traveling distances inside this region can be controlled with the [travelCost] multiplier.
  */
 @GodotBaseType
 public open class NavigationRegion3D : Node3D() {
@@ -70,9 +78,6 @@ public open class NavigationRegion3D : Node3D() {
           NIL)
     }
 
-  /**
-   * A bitfield determining all layers the region belongs to. These layers can be checked upon when requesting a path with [godot.NavigationServer3D.mapGetPath].
-   */
   public var layers: Long
     get() {
       TransferContext.writeArguments()
@@ -91,7 +96,7 @@ public open class NavigationRegion3D : Node3D() {
   }
 
   /**
-   * Bakes the [godot.NavigationMesh]. If `on_thread` is set to `true` (default), the baking is done on a separate thread. Baking on separate thread is useful because navigation baking is not a cheap operation. When it is completed, it automatically sets the new [godot.NavigationMesh]. Please note that baking on separate thread may be very slow if geometry is parsed from meshes as async access to each mesh involves heavy synchronization.
+   * Bakes the [godot.NavigationMesh]. If `on_thread` is set to `true` (default), the baking is done on a separate thread. Baking on separate thread is useful because navigation baking is not a cheap operation. When it is completed, it automatically sets the new [godot.NavigationMesh]. Please note that baking on separate thread may be very slow if geometry is parsed from meshes as async access to each mesh involves heavy synchronization. Also, please note that baking on a separate thread is automatically disabled on operating systems that cannot use threads (such as HTML5 with threads disabled).
    */
   public fun bakeNavigationMesh(): Unit {
     TransferContext.writeArguments()

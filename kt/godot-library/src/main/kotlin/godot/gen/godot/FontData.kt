@@ -50,7 +50,7 @@ import kotlin.Unit
  *
  * Supported font formats:
  *
- * - Dynamic font importer: TrueType (.ttf), OpenType (.otf), WOFF (.woff), WOFF2 (.woff2), Type 1 (.pfb, .pfm).
+ * - Dynamic font importer: TrueType (.ttf), TrueType collection (.ttc), OpenType (.otf), OpenType collection (.otc), WOFF (.woff), WOFF2 (.woff2), Type 1 (.pfb, .pfm).
  *
  * - Bitmap font importer: AngelCode BMFont (.fnt, .font), text and binary (version 3) format variants.
  *
@@ -313,7 +313,9 @@ public open class FontData : Resource() {
   }
 
   /**
-   * Loads a TrueType (.ttf), OpenType (.otf), WOFF (.woff), WOFF2 (.woff2) or Type 1 (.pfb, .pfm) dynamic font from file `path`.
+   * Loads a TrueType (.ttf), TrueType collection (.ttc), OpenType (.otf), OpenType collection (.otc), WOFF (.woff), WOFF2 (.woff2) or Type 1 (.pfb, .pfm) dynamic font from file `path`.
+   *
+   * **Note:** Use [faceIndex] to select specific face from the collection file.
    *
    * **Warning:** This method should only be used in the editor or in cases when you need to load external fonts at run-time, such as fonts located at the `user://` directory.
    */

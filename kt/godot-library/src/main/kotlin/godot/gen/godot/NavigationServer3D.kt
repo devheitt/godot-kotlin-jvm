@@ -41,9 +41,13 @@ import kotlin.Unit
  *
  * NavigationServer3D is the server responsible for all 3D navigation. It handles several objects, namely maps, regions and agents.
  *
- * Maps are made up of regions, which are made of navigation meshes. Together, they define the navigable areas in the 3D world. For two regions to be connected to each other, they must share a similar edge. An edge is considered connected to another if both of its two vertices are at a distance less than `edge_connection_margin` to the respective other edge's vertex.
+ * Maps are made up of regions, which are made of navigation meshes. Together, they define the navigable areas in the 3D world.
  *
- * You may assign navigation layers to regions with [godot.NavigationServer3D.regionSetLayers], which then can be checked upon when requesting a path with [godot.NavigationServer3D.mapGetPath]. This allows allowing or forbidding some areas to 3D objects.
+ * **Note:** Most NavigationServer changes take effect after the next physics frame and not immediately. This includes all changes made to maps, regions or agents by navigation related Nodes in the SceneTree or made through scripts.
+ *
+ * For two regions to be connected to each other, they must share a similar edge. An edge is considered connected to another if both of its two vertices are at a distance less than `edge_connection_margin` to the respective other edge's vertex.
+ *
+ * You may assign navigation layers to regions with [godot.NavigationServer3D.regionSetNavigationLayers], which then can be checked upon when requesting a path with [godot.NavigationServer3D.mapGetPath]. This allows allowing or forbidding some areas to 3D objects.
  *
  * To use the collision avoidance system, you may use agents. You can set an agent's target velocity, then the servers will emit a callback with a modified velocity.
  *
@@ -149,7 +153,7 @@ public object NavigationServer3D : Object() {
   }
 
   /**
-   * Returns the navigation path to reach the destination from the origin. `layers` is a bitmask of all region layers that are allowed to be in the path.
+   * Returns the navigation path to reach the destination from the origin. `navigation_layers` is a bitmask of all region navigation layers that are allowed to be in the path.
    */
   public fun mapGetPath(
     map: RID,
@@ -228,18 +232,12 @@ public object NavigationServer3D : Object() {
         NIL)
   }
 
-  /**
-   * Set the region's layers. This allows selecting regions from a path request (when using [godot.NavigationServer3D.mapGetPath]).
-   */
   public fun regionSetLayers(region: RID, layers: Long): Unit {
     TransferContext.writeArguments(_RID to region, LONG to layers)
     TransferContext.callMethod(rawPtr,
         ENGINEMETHOD_ENGINECLASS_NAVIGATIONSERVER3D_REGION_SET_LAYERS, NIL)
   }
 
-  /**
-   * Returns the region's layers.
-   */
   public fun regionGetLayers(region: RID): Long {
     TransferContext.writeArguments(_RID to region)
     TransferContext.callMethod(rawPtr,
@@ -406,7 +404,9 @@ public object NavigationServer3D : Object() {
   }
 
   /**
-   * Callback called at the end of the RVO process.
+   * Callback called at the end of the RVO process. If a callback is created manually and the agent is placed on a navigation map it will calculate avoidance for the agent and dispatch the calculated `safe_velocity` to the `receiver` object with a signal to the chosen `method` name.
+   *
+   * **Note:** Created callbacks are always processed independently of the SceneTree state as long as the agent is on a navigation map and not freed. To disable the dispatch of a callback from an agent use [agentSetCallback] again with a `null` object as the `receiver`.
    */
   public fun agentSetCallback(
     agent: RID,

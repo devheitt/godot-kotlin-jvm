@@ -256,7 +256,7 @@ public open class Mesh : Resource() {
   }
 
   /**
-   * Generate a [godot.TriangleMesh] from the mesh.
+   * Generate a [godot.TriangleMesh] from the mesh. Considers only surfaces using one of these primitive types: [PRIMITIVE_TRIANGLES], [PRIMITIVE_TRIANGLE_STRIP].
    */
   public fun generateTriangleMesh(): TriangleMesh? {
     TransferContext.writeArguments()

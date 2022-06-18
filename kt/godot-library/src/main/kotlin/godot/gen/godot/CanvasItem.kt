@@ -408,7 +408,7 @@ public open class CanvasItem internal constructor() : Node() {
   }
 
   /**
-   * Draws a colored, unfilled circle. See also [drawArc], [drawPolyline] and [drawPolygon].
+   * Draws a colored, filled circle. See also [drawArc], [drawPolyline] and [drawPolygon].
    */
   public fun drawCircle(
     position: Vector2,

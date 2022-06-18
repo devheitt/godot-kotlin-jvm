@@ -60,13 +60,7 @@ public open class VisualShaderNodeVectorFunc : VisualShaderNodeVectorBase() {
      * Returns `1/vector`.
      */
     FUNC_RECIPROCAL(3),
-    /**
-     * Converts RGB vector to HSV equivalent.
-     */
     FUNC_RGB2HSV(4),
-    /**
-     * Converts HSV vector to RGB equivalent.
-     */
     FUNC_HSV2RGB(5),
     /**
      * Returns the absolute value of the parameter.
@@ -124,9 +118,6 @@ public open class VisualShaderNodeVectorFunc : VisualShaderNodeVectorBase() {
      * Finds the nearest integer less than or equal to the parameter.
      */
     FUNC_FLOOR(19),
-    /**
-     * Computes the fractional part of the argument.
-     */
     FUNC_FRAC(20),
     /**
      * Returns the inverse of the square root of the parameter.

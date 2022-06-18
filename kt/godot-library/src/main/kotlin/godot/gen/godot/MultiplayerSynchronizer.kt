@@ -54,9 +54,6 @@ public open class MultiplayerSynchronizer : Node() {
           ENGINEMETHOD_ENGINECLASS_MULTIPLAYERSYNCHRONIZER_SET_REPLICATION_INTERVAL, NIL)
     }
 
-  /**
-   *
-   */
   public var resource: SceneReplicationConfig?
     get() {
       TransferContext.writeArguments()

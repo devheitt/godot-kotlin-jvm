@@ -49,9 +49,6 @@ public open class Curve2D : Resource() {
     callConstructor(ENGINECLASS_CURVE2D)
   }
 
-  /**
-   * Returns the number of points describing the curve.
-   */
   public fun getPointCount(): Long {
     TransferContext.writeArguments()
     TransferContext.callMethod(rawPtr, ENGINEMETHOD_ENGINECLASS_CURVE2D_GET_POINT_COUNT, LONG)

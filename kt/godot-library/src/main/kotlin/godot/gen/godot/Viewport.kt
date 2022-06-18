@@ -107,7 +107,7 @@ public open class Viewport internal constructor() : Node() {
     }
 
   /**
-   * If `true`, the viewport will use the [godot.World3D] defined in [world3d].
+   * If `true`, the viewport will use a unique copy of the [godot.World3D] defined in [world3d].
    */
   public var ownWorld3d: Boolean
     get() {

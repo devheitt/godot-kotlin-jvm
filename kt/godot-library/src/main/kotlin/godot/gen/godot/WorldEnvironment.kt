@@ -44,7 +44,7 @@ public open class WorldEnvironment : Node() {
     }
 
   /**
-   *
+   * The [godot.CameraEffects] resource used by this [godot.WorldEnvironment], defining the default properties. This [godot.CameraEffects] resource will be used by all [godot.Camera3D]s that do not define their own [godot.CameraEffects].
    */
   public var cameraEffects: CameraEffects?
     get() {

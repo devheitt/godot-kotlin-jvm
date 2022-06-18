@@ -64,7 +64,7 @@ public open class VehicleWheel3D : Node3D() {
     }
 
   /**
-   * The steering angle for the wheel. Setting this to a non-zero value will result in the vehicle turning when it's moving.
+   * The steering angle for the wheel, in radians. Setting this to a non-zero value will result in the vehicle turning when it's moving.
    */
   public var steering: Double
     get() {

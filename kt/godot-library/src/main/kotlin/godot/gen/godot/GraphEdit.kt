@@ -54,7 +54,7 @@ public open class GraphEdit : Control() {
       "isOutput")
 
   /**
-   * Emitted when a GraphNode is attempted to be removed from the GraphEdit.
+   * Emitted when a GraphNode is attempted to be removed from the GraphEdit. Provides a list of node names to be removed (all selected nodes, excluding nodes without closing button).
    */
   public val deleteNodesRequest: Signal0 by signal()
 

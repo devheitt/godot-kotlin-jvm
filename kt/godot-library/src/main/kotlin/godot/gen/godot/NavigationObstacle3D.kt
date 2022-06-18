@@ -20,6 +20,8 @@ import kotlin.Unit
  * 3D Obstacle used in navigation for collision avoidance.
  *
  * 3D Obstacle used in navigation for collision avoidance. The obstacle needs navigation data to work correctly. [godot.NavigationObstacle3D] is physics safe.
+ *
+ * **Note:** Obstacles are intended as a last resort option for constantly moving objects that cannot be (re)baked to a navigation mesh efficiently.
  */
 @GodotBaseType
 public open class NavigationObstacle3D : Node() {

@@ -1,6 +1,6 @@
 package godot.entrygenerator.generator.hintstring
 
-import godot.entrygenerator.exceptions.WrongAnnotationUsageException
+import godot.entrygenerator.exceptions.WrongPropertyAnnotationUsageException
 import godot.entrygenerator.model.ColorNoAlphaHintAnnotation
 import godot.entrygenerator.model.RegisteredProperty
 
@@ -10,7 +10,7 @@ class ColorNoAlphaHintStringGenerator(
 
     override fun getHintString(): String {
         if (registeredProperty.type.fqName != "godot.core.Color") {
-            throw WrongAnnotationUsageException(registeredProperty, propertyHintAnnotation, "Color")
+            throw WrongPropertyAnnotationUsageException(registeredProperty, propertyHintAnnotation, "Color")
         }
         return "" //hint string is empty for this typehint
     }

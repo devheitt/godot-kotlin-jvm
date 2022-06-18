@@ -348,18 +348,12 @@ public open class TileData : Object() {
     return TransferContext.readReturnValue(DOUBLE, false) as Double
   }
 
-  /**
-   * Sets the tile's terrain bit for the given `peering_bit` direction.
-   */
   public fun setPeeringBitTerrain(peeringBit: TileSet.CellNeighbor, terrain: Long): Unit {
     TransferContext.writeArguments(LONG to peeringBit.id, LONG to terrain)
     TransferContext.callMethod(rawPtr, ENGINEMETHOD_ENGINECLASS_TILEDATA_SET_PEERING_BIT_TERRAIN,
         NIL)
   }
 
-  /**
-   * Returns the tile's terrain bit for the given `peering_bit` direction.
-   */
   public fun getPeeringBitTerrain(peeringBit: TileSet.CellNeighbor): Long {
     TransferContext.writeArguments(LONG to peeringBit.id)
     TransferContext.callMethod(rawPtr, ENGINEMETHOD_ENGINECLASS_TILEDATA_GET_PEERING_BIT_TERRAIN,

@@ -2234,7 +2234,7 @@ public object RenderingServer : Object() {
   }
 
   /**
-   * Sets the shape of the fog volume to either [godot.RenderingServer.FOG_VOLUME_SHAPE_ELLIPSOID], [godot.RenderingServer.FOG_VOLUME_SHAPE_BOX], or [godot.RenderingServer.FOG_VOLUME_SHAPE_ELLIPSOID] or [godot.RenderingServer.FOG_VOLUME_SHAPE_WORLD].
+   * Sets the shape of the fog volume to either [godot.RenderingServer.FOG_VOLUME_SHAPE_ELLIPSOID], [godot.RenderingServer.FOG_VOLUME_SHAPE_CONE], [godot.RenderingServer.FOG_VOLUME_SHAPE_CYLINDER], [godot.RenderingServer.FOG_VOLUME_SHAPE_BOX] or [godot.RenderingServer.FOG_VOLUME_SHAPE_WORLD].
    */
   public fun fogVolumeSetShape(fogVolume: RID, shape: RenderingServer.FogVolumeShape): Unit {
     TransferContext.writeArguments(_RID to fogVolume, LONG to shape.id)
@@ -2243,7 +2243,7 @@ public object RenderingServer : Object() {
   }
 
   /**
-   * Sets the size of the fog volume when shape is [FOG_VOLUME_SHAPE_ELLIPSOID] or [FOG_VOLUME_SHAPE_BOX].
+   * Sets the size of the fog volume when shape is [godot.RenderingServer.FOG_VOLUME_SHAPE_ELLIPSOID], [godot.RenderingServer.FOG_VOLUME_SHAPE_CONE], [godot.RenderingServer.FOG_VOLUME_SHAPE_CYLINDER] or [godot.RenderingServer.FOG_VOLUME_SHAPE_BOX].
    */
   public fun fogVolumeSetExtents(fogVolume: RID, extents: Vector3): Unit {
     TransferContext.writeArguments(_RID to fogVolume, VECTOR3 to extents)
@@ -2487,7 +2487,7 @@ public object RenderingServer : Object() {
    *
    * [/codeblocks]
    *
-   * Using this can result in significant optimization, especially on lower-end devices. However, it comes at the cost of having to manage your viewports manually. For a further optimization see, [viewportSetRenderDirectToScreen].
+   * Using this can result in significant optimization, especially on lower-end devices. However, it comes at the cost of having to manage your viewports manually. For further optimization, see [viewportSetRenderDirectToScreen].
    */
   public fun viewportAttachToScreen(
     viewport: RID,
@@ -6450,7 +6450,7 @@ public object RenderingServer : Object() {
     id: Long
   ) {
     /**
-     * [godot.FogVolume] will be shaped like an ellipsoid.
+     * [godot.FogVolume] will be shaped like an ellipsoid (stretched sphere).
      */
     FOG_VOLUME_SHAPE_ELLIPSOID(0),
     /**

@@ -220,21 +220,11 @@ public open class SceneTree : MainLoop() {
     return TransferContext.readReturnValue(BOOL, false) as Boolean
   }
 
-  /**
-   * If `true`, the application automatically accepts quitting. Enabled by default.
-   *
-   * For mobile platforms, see [setQuitOnGoBack].
-   */
   public fun setAutoAcceptQuit(enabled: Boolean): Unit {
     TransferContext.writeArguments(BOOL to enabled)
     TransferContext.callMethod(rawPtr, ENGINEMETHOD_ENGINECLASS_SCENETREE_SET_AUTO_ACCEPT_QUIT, NIL)
   }
 
-  /**
-   * If `true`, the application quits automatically on going back (e.g. on Android). Enabled by default.
-   *
-   * To handle 'Go Back' button when this option is disabled, use [godot.DisplayServer.WINDOW_EVENT_GO_BACK_REQUEST].
-   */
   public fun setQuitOnGoBack(enabled: Boolean): Unit {
     TransferContext.writeArguments(BOOL to enabled)
     TransferContext.callMethod(rawPtr, ENGINEMETHOD_ENGINECLASS_SCENETREE_SET_QUIT_ON_GO_BACK, NIL)
@@ -347,12 +337,14 @@ public open class SceneTree : MainLoop() {
   /**
    * Calls `method` on each member of the given group, respecting the given [enum GroupCallFlags]. You can pass arguments to `method` by specifying them at the end of the method call.
    *
+   * ```
+   * 				# Call the method in a deferred manner and in reverse order.
+   * 				get_tree().call_group_flags(SceneTree.GROUP_CALL_DEFERRED | SceneTree.GROUP_CALL_REVERSE)
+   * 				```
+   *
    * **Note:** Due to design limitations, [callGroupFlags] will fail silently if one of the arguments is `null`.
    *
-   * ```
-   * 				# Call the method immediately and in reverse order.
-   * 				get_tree().call_group_flags(SceneTree.GROUP_CALL_REALTIME | SceneTree.GROUP_CALL_REVERSE, "bases", "destroy")
-   * 				```
+   * **Note:** Group call flags are used to control the method calling behavior. By default, methods will be called immediately in a way similar to [callGroup]. However, if the [GROUP_CALL_DEFERRED] flag is present in the `flags` argument, methods will be called with a one-frame delay in a way similar to [godot.Object.setDeferred].
    */
   public fun callGroupFlags(
     flags: Long,
@@ -366,6 +358,8 @@ public open class SceneTree : MainLoop() {
 
   /**
    * Sends the given notification to all members of the `group`, respecting the given [enum GroupCallFlags].
+   *
+   * **Note:** Group call flags are used to control the notification sending behavior. By default, notifications will be sent immediately in a way similar to [notifyGroup]. However, if the [GROUP_CALL_DEFERRED] flag is present in the `flags` argument, notifications will be sent with a one-frame delay in a way similar to using `Object.call_deferred("notification", ...)`.
    */
   public fun notifyGroupFlags(
     callFlags: Long,
@@ -378,6 +372,8 @@ public open class SceneTree : MainLoop() {
 
   /**
    * Sets the given `property` to `value` on all members of the given group, respecting the given [enum GroupCallFlags].
+   *
+   * **Note:** Group call flags are used to control the property setting behavior. By default, properties will be set immediately in a way similar to [setGroup]. However, if the [GROUP_CALL_DEFERRED] flag is present in the `flags` argument, properties will be set with a one-frame delay in a way similar to [godot.Object.callDeferred].
    */
   public fun setGroupFlags(
     callFlags: Long,
@@ -390,11 +386,11 @@ public open class SceneTree : MainLoop() {
   }
 
   /**
-   * Calls `method` on each member of the given group. You can pass arguments to `method` by specifying them at the end of the method call. This method is equivalent of calling [callGroupFlags] with [GROUP_CALL_DEFAULT] flag.
+   * Calls `method` on each member of the given group. You can pass arguments to `method` by specifying them at the end of the method call.
    *
    * **Note:** Due to design limitations, [callGroup] will fail silently if one of the arguments is `null`.
    *
-   * **Note:** [callGroup] will always call methods with an one-frame delay, in a way similar to [godot.Object.callDeferred]. To call methods immediately, use [callGroupFlags] with the [GROUP_CALL_REALTIME] flag.
+   * **Note:** [callGroup] will call methods immediately on all members at once, which can cause stuttering if an expensive method is called on lots of members. To wait for one frame after [callGroup] was called, use [callGroupFlags] with the [GROUP_CALL_DEFERRED] flag.
    */
   public fun callGroup(
     group: StringName,
@@ -407,6 +403,8 @@ public open class SceneTree : MainLoop() {
 
   /**
    * Sends the given notification to all members of the `group`.
+   *
+   * **Note:** [notifyGroup] will immediately notify all members at once, which can cause stuttering if an expensive method is called as a result of sending the notification lots of members. To wait for one frame, use [notifyGroupFlags] with the [GROUP_CALL_DEFERRED] flag.
    */
   public fun notifyGroup(group: StringName, notification: Long): Unit {
     TransferContext.writeArguments(STRING_NAME to group, LONG to notification)
@@ -415,6 +413,8 @@ public open class SceneTree : MainLoop() {
 
   /**
    * Sets the given `property` to `value` on all members of the given group.
+   *
+   * **Note:** [setGroup] will set the property immediately on all members at once, which can cause stuttering if a property with an expensive setter is set on lots of members. To wait for one frame, use [setGroupFlags] with the [GROUP_CALL_DEFERRED] flag.
    */
   public fun setGroup(
     group: StringName,
@@ -493,9 +493,6 @@ public open class SceneTree : MainLoop() {
      * Call a group in reverse scene order.
      */
     GROUP_CALL_REVERSE(1),
-    /**
-     * Call a group immediately (calls are normally made on idle).
-     */
     GROUP_CALL_REALTIME(2),
     /**
      * Call a group only once even if the call is executed many times.
