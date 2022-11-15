@@ -10,12 +10,12 @@ import godot.annotation.RegisterProperty
 import godot.annotation.RegisterSignal
 import godot.annotation.processor.ext.fqNameUnsafe
 import godot.annotation.processor.ext.mapToClazz
-import godot.entrygenerator.model.RegisteredClass
+import godot.entrygenerator.model.Clazz
 import godot.entrygenerator.model.SourceFile
 
 class RegistrationAnnotationVisitor(
     private val projectBasePath: String,
-    private val registeredClassToKSFileMap: MutableMap<RegisteredClass, KSFile>,
+    private val registeredClassToKSFileMap: MutableMap<Clazz, KSFile>,
     private val sourceFilesContainingRegisteredClasses: MutableList<SourceFile>
 ) : KSVisitorVoid() {
 
@@ -34,10 +34,7 @@ class RegistrationAnnotationVisitor(
             .mapNotNull { declaration ->
                 when (declaration) {
                     is KSClassDeclaration -> {
-                        val clazz = declaration.mapToClazz(projectBasePath)
-                        if (clazz is RegisteredClass) {
-                            clazz
-                        } else null
+                        declaration.mapToClazz(projectBasePath)
                     }
                     else -> if (declaration.annotations.any { registerAnnotations.contains(it.fqNameUnsafe) }) {
                         throw IllegalStateException("${declaration.qualifiedName} was registered top level. Only classes can be registered top level.")
